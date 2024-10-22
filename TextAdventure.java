@@ -29,13 +29,15 @@ public class TextAdventure
     ourHero.changeName(input);
     
     // describe the starting situation. Feel free to change this
-    System.out.println("Weclome " + ourHero.getName() + " to your great cheese adventure!\nHow many crackers would you like to bring? Please enter a number: ");
-    int inputNum = inScanner.nextInt();
+    System.out.println("Welcome " + ourHero.getName() + " to your great cheese adventure!\nHow many crackers would you like to bring? Please enter a number: ");
+    input = inScanner.nextLine();
+    int inputNum = Integer.parseInt(input);
     ourHero.setCrackers(inputNum);
     System.out.println("Great, you have " + ourHero.getCrackers() + " crackers\nBUT you still need " + ourHero.getCheeseNeeded() + " pieces of cheese");
     System.out.println("Where would you like to acquire this cheese (please enter the number that corresponds with your choice)");
     System.out.println("1: Go to the supermarket\n2: Go to the moon     ");
-    inputNum = inScanner.nextInt();
+    input = inScanner.nextLine();
+    inputNum = Integer.parseInt(input);
     if (inputNum == 1){
       enterZone1();
     }else if (inputNum == 2){
@@ -51,19 +53,20 @@ public class TextAdventure
   }
   private void enterZone1()
   {
-    String input;
     console.setImage("CheeseAisle.jpg");
-    System.out.println("Congratulations, this was a very smart decision.\nWelcome to the supermarket " + ourHero.getName());
-    System.out.println("You've walked to the cheese aisle but you see that there is not that much cheese left\nPlease enter a type of cheese to see if it is in stock: ");
-    input = inScanner.nextLine();
-    Shopping(input);
+    System.out.println("That was a very smart decision.\nWelcome to the supermarket " + ourHero.getName());
+    System.out.println("You've walked to the cheese aisle but you see that there is not that much cheese left");
+    System.out.println("Please enter a type of cheese to see if it is in stock: ");
+    String cheese = inScanner.nextLine();
+    Shopping(cheese);
   }
   private void Shopping(String cheese){
+    System.out.println("Yes " + cheese);
     cheese = cheese.toLowerCase();
     if (cheese.equals("feta") || cheese.equals("cheddar") || cheese.equals("parmesan") || cheese.equals("mozzarella")){
       System.out.println("Congratulations!" + cheese.substring(0,1).toUpperCase() + cheese.substring(1) + "is in stock\nHow many pieces would you like to buy? Please enter a number: ");
-      int inputNum = inScanner.nextInt();
-      ourHero.setCheese(inputNum);
+      String input = inScanner.nextLine();
+      ourHero.setCheese(Integer.parseInt(input));
     }
     else if (cheese.equals("brie")){
       System.out.println("Sorry, brie is not in stock. \nIt is on the moon though! Would you like to go there? (Enter y/n): ");
@@ -79,6 +82,13 @@ public class TextAdventure
           input = inScanner.nextLine();
           Shopping(input);
         }
+        else if (input.equals("n")){
+          DryCrackers();
+        }
+        else{
+          System.out.println("That's not an option");
+          DryCrackers();
+        }
       }
       else{
         System.out.println("That's not an option");
@@ -86,6 +96,23 @@ public class TextAdventure
       }
     }
     else if (cheese.equals("ricotta") || cheese.equals("camembert") || cheese.equals("provolone") || cheese.equals("gouda")){
+      System.out.println("Sorry, this cheese is not in stock.");
+      System.out.println("Would you like to choose another cheese then? (Enter y/n): ");
+      String input = inScanner.nextLine();
+      if (input.equals("y")){
+        System.out.println("Please enter a type of cheese to see if it is in stock: ");
+        input = inScanner.nextLine();
+        Shopping(input);
+      }
+      else if (input.equals("n")){
+          DryCrackers();
+      }
+      else{
+          System.out.println("That's not an option");
+          DryCrackers();
+      }
+    }
+    else{
       System.out.println("Are you sure that's even a cheese?\nAnyway, it's definitly not in stock.");
       System.out.println("Would you like to choose another cheese then? (Enter y/n): ");
       String input = inScanner.nextLine();
@@ -93,9 +120,13 @@ public class TextAdventure
         System.out.println("Please enter a type of cheese to see if it is in stock: ");
         input = inScanner.nextLine();
         Shopping(input);
-      }else{
-        System.out.println("That's not an option");
-        DryCrackers();
+      }
+      else if (input.equals("n")){
+          DryCrackers();
+      }
+      else{
+          System.out.println("That's not an option");
+          DryCrackers();
       }
     }
   }
