@@ -8,7 +8,7 @@ public class TextAdventure
 
   public TextAdventure()
   {
-    console = new FancyConsole("Great Cheese Adventure!", 1000, 1000);
+    console = new FancyConsole("Great Cheese Adventure!", 1000, 1500);
     inScanner = new Scanner(System.in);
 
     // feel free to change the player's starting values
@@ -34,10 +34,13 @@ public class TextAdventure
     int inputNum = Integer.parseInt(input);
     ourHero.setCrackers(inputNum);
     System.out.println("Great, you have " + ourHero.getCrackers() + " crackers\nBUT you still need " + ourHero.getCheeseNeeded() + " pieces of cheese");
+    GetCheese();
+  }
+  private void GetCheese(){
     System.out.println("Where would you like to acquire this cheese (please enter the number that corresponds with your choice)");
     System.out.println("1: Go to the supermarket\n2: Go to the moon     ");
-    input = inScanner.nextLine();
-    inputNum = Integer.parseInt(input);
+    String input = inScanner.nextLine();
+    int inputNum = Integer.parseInt(input);
     if (inputNum == 1){
       enterZone1();
     }else if (inputNum == 2){
@@ -51,6 +54,22 @@ public class TextAdventure
     console.setImage("Crackers.jpg");
     System.out.println("Well, guess you're eating your crackers dry");
   }
+  private void BuyCheese(int pieces){
+    if (pieces > ourHero.getCheeseNeeded()){
+      System.out.println("This would give you more cheese than crackers\nGood for you");
+      System.out.println("Good job!\nYou have completed your cheese adventure");
+    }
+    else if (pieces == ourHero.getCheeseNeeded()){
+      System.out.println("You have gotten just enough cheese!");
+      System.out.println("Good job!\nYou have completed your cheese adventure");
+    }
+    else{
+      ourHero.setCheese(ourHero.getCheese()+pieces);
+      System.out.println("You now have " + ourHero.getCheese() + " pieces of cheese");
+      System.out.println("Now you only need " + ourHero.getCheeseNeeded() + "pieces of cheese");
+      GetCheese();
+    }
+  }
   private void enterZone1()
   {
     console.setImage("CheeseAisle.jpg");
@@ -61,12 +80,11 @@ public class TextAdventure
     Shopping(cheese);
   }
   private void Shopping(String cheese){
-    System.out.println("Yes " + cheese);
     cheese = cheese.toLowerCase();
     if (cheese.equals("feta") || cheese.equals("cheddar") || cheese.equals("parmesan") || cheese.equals("mozzarella")){
-      System.out.println("Congratulations!" + cheese.substring(0,1).toUpperCase() + cheese.substring(1) + "is in stock\nHow many pieces would you like to buy? Please enter a number: ");
+      System.out.println("Congratulations! " + cheese.substring(0,1).toUpperCase() + cheese.substring(1) + " is in stock\nHow many pieces would you like to buy? Please enter a number: ");
       String input = inScanner.nextLine();
-      ourHero.setCheese(Integer.parseInt(input));
+      BuyCheese(Integer.parseInt(input));
     }
     else if (cheese.equals("brie")){
       System.out.println("Sorry, brie is not in stock. \nIt is on the moon though! Would you like to go there? (Enter y/n): ");
@@ -113,7 +131,7 @@ public class TextAdventure
       }
     }
     else{
-      System.out.println("Are you sure that's even a cheese?\nAnyway, it's definitly not in stock.");
+      System.out.println("Are you sure that's even a cheese?\nAnyway, it's definitely not in stock.");
       System.out.println("Would you like to choose another cheese then? (Enter y/n): ");
       String input = inScanner.nextLine();
       if (input.equals("y")){
