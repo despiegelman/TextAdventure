@@ -170,7 +170,7 @@ public class TextAdventure
     console.setImage("MadeRocket.png");
     System.out.println("You have successfully made your rocket.");
     System.out.println("Where on the moon do you want to go? (Enter the number that corresponds with your destination)");
-    System.out.println("1: The far side\n2: The near side\n");
+    System.out.println("1: The far side\n2: The near side\nEnter here: ");
     String input = inScanner.nextLine();
     int numInput = Integer.parseInt(input);
     if (numInput == 1 || numInput == 2){
@@ -197,16 +197,16 @@ public class TextAdventure
    else if (input.equals("n")){
      console.setImage("BuildingBadly.png");
      System.out.println("That's not such a smart idea.\nBut let's see if you can still make it succesfully.");
-     System.out.println("Enter a random number 1-10 inclusive");
+     System.out.println("Enter a random number 1-10 inclusive: ");
      input = inScanner.nextLine();
      int num = (int)(Math.random()*10) + 1;
-     if (Integer.parseInt(input) == num){
-       System.out.println("You are correct! (and very lucky)");
-       GoToMoon();
+     if (Integer.parseInt(input) != num){
+      System.out.println("Sorry, you're wrong, the number was " + num + "\nBack to the drawing board (literally)");
+      BuildRocket();
      }
      else{
-       System.out.println("Sorry, you're wrong, the number was " + num + "\nBack to the drawing board (literally)");
-       BuildRocket();
+       System.out.println("You are correct! (and very lucky)");
+       GoToMoon();
      }
    }
    else{
