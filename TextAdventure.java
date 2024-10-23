@@ -161,22 +161,60 @@ public class TextAdventure
     }
   }
   private void enterZone2()
-  {
-    // change image
-    // ADD CODE HERE
-
-    // describe the area/situation to the user. 
-    // Give them options for choices.
-    // ADD CODE HERE
-
-    // Take action or go to another zone based on their choice
-    // ADD CODE HERE
-    
-  }
+ {
+    System.out.println("Congratulations! You're going to the moon");
+    System.out.println("First, you need to build a rocket.");
+    BuildRocket();
+ }
+ private void GoToMoon(){
+    console.setImage("MadeRocket.png");
+    System.out.println("You have successfully made your rocket.");
+    System.out.println("Where on the moon do you want to go? (Enter the number that corresponds with your destination)");
+    System.out.println("1: The far side\n2: The near side\n");
+    String input = inScanner.nextLine();
+    int numInput = Integer.parseInt(input);
+    if (numInput == 1 || numInput == 2){
+      System.out.println("There's brie there!");
+    }
+    else{
+      System.out.println("That's not an option\nHow did you manage to build a rocket?\nYou'll go to the near side because I wouldn't trust your rocket to be stable enough to make it to the far side\nThat's okay, the whole moon is brie anyway");
+    }
+    console.setImage("MoonCheese.jpg");
+    System.out.println("You've made it to the moon!");
+    System.out.println("How many pieces of cheese do you want? (Enter a number): ");
+    input = inScanner.nextLine();
+    BuyCheese(Integer.parseInt(input));
+   }
+ private void BuildRocket(){
+   console.setImage("RocketDrawing.png");
+   System.out.println("You draw a new diagram.");
+   System.out.println("Now, do you let your dog build the rocket with you? (enter y or n): ");
+   String input = inScanner.nextLine();
+   if (input.equals("y")){
+      System.out.println("That was a great decision.");
+      GoToMoon();
+    }
+   else if (input.equals("n")){
+     console.setImage("NotAvaible(photo1).png");
+     System.out.println("That's not such a smart idea.\nBut let's see if you can still make it succesfully.");
+     System.out.println("Enter a random number 1-10 inclusive");
+     input = inScanner.nextLine();
+     if (Integer.parseInt(input) == (int)(Math.random()*10) + 1){
+       System.out.println("You are correct! (and very lucky)");
+       GoToMoon();
+     }
+     else{
+       System.out.println("Sorry, you're wrong.\nBack to the drawing board (literally)");
+       BuildRocket();
+     }
+   }
+   else{
+     System.out.println("Sorry, that's not an option.\nBack to the drawing board (literally)");
+       BuildRocket();
+   }
+ }
   private void gameEnd()
   {
-    // ADD CODE HERE
-
     inScanner.close();
   }
 }
