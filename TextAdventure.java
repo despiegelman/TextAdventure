@@ -58,7 +58,7 @@ public class TextAdventure
   }
   private void BuyCheese(int pieces){
     if (pieces > ourHero.getCheeseNeeded()){
-      console.setImage("LotsOfCheese.png");
+      console.setImage("LotsOfCheese.jpg");
       System.out.println("This would give you more cheese than crackers\nGood for you");
       System.out.println("Good job!\nYou have completed your cheese adventure");
       gameEnd();
@@ -195,16 +195,17 @@ public class TextAdventure
       GoToMoon();
     }
    else if (input.equals("n")){
-     console.setImage("NotAvaible(photo1).png");
+     console.setImage("BuildingBadly.png");
      System.out.println("That's not such a smart idea.\nBut let's see if you can still make it succesfully.");
      System.out.println("Enter a random number 1-10 inclusive");
      input = inScanner.nextLine();
-     if (Integer.parseInt(input) == (int)(Math.random()*10) + 1){
+     int num = (int)(Math.random()*10) + 1;
+     if (Integer.parseInt(input) == num){
        System.out.println("You are correct! (and very lucky)");
        GoToMoon();
      }
      else{
-       System.out.println("Sorry, you're wrong.\nBack to the drawing board (literally)");
+       System.out.println("Sorry, you're wrong, the number was " + num + "\nBack to the drawing board (literally)");
        BuildRocket();
      }
    }
